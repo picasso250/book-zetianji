@@ -1,0 +1,20 @@
+---
+---
+
+@import "{{ site.theme }}";
+@import "typo.css";
+
+.page-header {
+
+  @include large {
+    padding: 1rem 6rem;
+  }
+
+  @include medium {
+    padding: 1rem 4rem;
+  }
+
+  @include small {
+    padding: 1rem 1rem;
+  }
+}
