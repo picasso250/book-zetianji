@@ -26,4 +26,7 @@ li {
 
 p {
   line-height: 2.2em;
+  font-size: 0.9em;
+  text-indent:2em;
+  font-family: "宋体";
 }
