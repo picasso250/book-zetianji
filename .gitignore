@@ -1,3 +1,4 @@
 .script/*.html
+.script/ezla
 _site/
 Gemfile*
