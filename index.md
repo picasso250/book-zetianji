@@ -1,4 +1,4 @@
-[繁體](/zh/)
+﻿[繁體](/zh/)
 
 ## Singularity
 
@@ -9,6 +9,7 @@
 - [新年：福音——DAY FALL](/zh_CN/8898015)
 - [新年：福音——DAY REST](/zh_CN/8898648)
 - [新年：福音——DAY SET](/zh_CN/8898731)
+- [新年：福音——DAY BREAK-phase1](/zh_CN/0027-DAY-BREAK-phase1)
 
 ## Setting
 ## Main(2073-2083)
