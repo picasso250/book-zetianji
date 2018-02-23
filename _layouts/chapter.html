@@ -57,7 +57,7 @@
       </script>
     {% endif %}
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="http://lib.sinaapp.com/js/jquery/3.1.0/jquery-3.1.0.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
@@ -102,20 +102,19 @@ if (!Object.keys) {
     };
   }());
 };
-    var role_description_map = {
-      "威斯克":"威斯克 是个狙击手吧",
-      "伍德":"开发小组负责人"
-    };
     $(function () {
-      $('.main-content p').each(function (i,e) {
-        var r = new RegExp("("+Object.keys(role_description_map).join("|")+")");
-        $(e).html($(e).html().replace(r,'<span class="role-name">$1</span>'));
+      $.get("/roles.json", function (role_description_map) {
+        $('.main-content p').each(function (i,e) {
+          var r = new RegExp("("+Object.keys(role_description_map).join("|")+")");
+          $(e).html($(e).html().replace(r,'<span class="role-name">$1</span>'));
+        });
+        $('.role-name').each(function (i,e) {
+          var $e=$(e);
+          var name = $e.text();
+          $e.popover({title:name,content:role_description_map[name]});
+        });
       });
-      $('.role-name').each(function (i,e) {
-        var $e=$(e);
-        var name = $e.text();
-        $e.popover({title:name,content:role_description_map[name]});
-      });
+      
     });
     </script>
     <style media="screen">
