@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: 　
+title: 之前的事
 ---
 
 

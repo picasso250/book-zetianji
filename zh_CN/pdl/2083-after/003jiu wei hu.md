@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: 　Chapter 3  九尾狐
+title: Chapter 3 九尾狐
 ---
 
 　Chapter 3  九尾狐

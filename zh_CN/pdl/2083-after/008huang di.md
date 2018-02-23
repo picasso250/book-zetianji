@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter 8   皇帝
+title: Chapter 8 皇帝
 ---
 
 Chapter 8   皇帝

@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter 7  醒来
+title: Chapter 7 醒来
 ---
 
 Chapter 7  醒来

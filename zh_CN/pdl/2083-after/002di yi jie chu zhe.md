@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: 　　Chapter 2   第一接触者
+title: Chapter 2 第一接触者
 ---
 
 　　Chapter 2   第一接触者

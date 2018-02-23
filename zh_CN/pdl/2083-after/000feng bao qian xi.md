@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: 　　Chapter 0   风暴前夕
+title: Chapter 0 风暴前夕
 ---
 
 　　Chapter 0   风暴前夕

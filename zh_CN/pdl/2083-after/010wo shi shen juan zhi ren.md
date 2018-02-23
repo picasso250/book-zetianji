@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter 10  我是神眷之人
+title: Chapter 10 我是神眷之人
 ---
 
  Chapter 10  我是神眷之人

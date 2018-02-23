@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter9  佛雷卡们
+title: Chapter 9 佛雷卡们
 ---
 
 Chapter9  佛雷卡们

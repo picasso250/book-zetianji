@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter 4     诸海之白麒麟
+title: Chapter 4 诸海之白麒麟
 ---
 
 Chapter 4     诸海之白麒麟

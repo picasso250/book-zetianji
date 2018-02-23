@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: Chapter 6  善后
+title: Chapter 6 善后
 ---
 
 Chapter 6  善后
