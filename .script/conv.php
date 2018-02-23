@@ -20,9 +20,9 @@ function do_dir($dir)
       $md_content = preg_replace('/\n/', "\n\n", $content_utf8);
       $title_raw = get_first_line($md_content);
       $title = trim($title_raw);
-      $md_content = "---\nlayout: chapter\ntitle: $title\n---\n\n#".$md_content;
+      $md_content = "---\nlayout: chapter\ntitle: $title\n---\n\n".$md_content;
       $raw_file_name = substr($f,0,strlen($f)-4);
-      echo "$raw_file_name ",mb_detect_encoding($raw_file_name),PHP_EOL;
+      // echo "$raw_file_name ",mb_detect_encoding($raw_file_name),PHP_EOL;
       $file_name_utf8 = iconv("GBK", "UTF-8", $raw_file_name);
       $md_file = transliterator_transliterate('Any-Latin; Latin-ASCII; Lower()', $file_name_utf8).".md";
       $md_file = str_replace(":", "", $md_file); // windows
@@ -35,10 +35,14 @@ function do_dir($dir)
 }
 
 function get_first_line($content) {
-  $pos = strpos($content, "\n"); 
+  $pos = -1;
+  do {
+    $pos = strpos($content, "\n", $pos+1);
+    // BOM 头
+    // http://blog.sina.com.cn/s/blog_49f914ab0101eyjj.html
+  } while (trim(substr($content, 0, $pos), "\r\n\t \xEF\xBB\xBF") === "");
   return substr($content, 0, $pos);
 }
-
 function startsWith($haystack, $needle)
 {
      $length = strlen($needle);
