@@ -1,6 +1,7 @@
 <?php
 
 $ext = ".txt";
+mb_detect_order("UTF-8,GBK");
 do_dir(".");
 
 function do_dir($dir)
@@ -20,7 +21,11 @@ function do_dir($dir)
       $title_raw = get_first_line($md_content);
       $title = trim($title_raw);
       $md_content = "---\nlayout: chapter\ntitle: $title\n---\n\n#".$md_content;
-      $md_file = substr($f,0,strlen($f)-4).".md";
+      $raw_file_name = substr($f,0,strlen($f)-4);
+      echo "$raw_file_name ",mb_detect_encoding($raw_file_name),PHP_EOL;
+      $file_name_utf8 = iconv("GBK", "UTF-8", $raw_file_name);
+      $md_file = transliterator_transliterate('Any-Latin; Latin-ASCII; Lower()', $file_name_utf8).".md";
+      $md_file = str_replace(":", "", $md_file); // windows
       echo "iconv $f => $md_file\n";
       file_put_contents($md_file, $md_content);
       unlink($f);
