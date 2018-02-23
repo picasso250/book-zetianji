@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: 新年：福音
+title: 新年：福音——DAY BREAK-phase1
 ---
 
 新年：福音

@@ -1,6 +1,6 @@
 ---
 layout: chapter
-title: 新年：福音
+title: 新年：福音——DAY ONE
 ---
 
 新年：福音
