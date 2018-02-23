@@ -28,7 +28,7 @@
 - [Chapter 1   约柜](/zh_CN/pdl/2083-after/001yue gui)
 - [Chapter 2   第一接触者](/zh_CN/pdl/2083-after/002di yi jie chu zhe)
 - [Chapter 3  九尾狐](/zh_CN/pdl/2083-after/003jiu wei hu)
-- [Chapter 4     &#35832;海之白麒麟](/zh_CN/pdl/2083-after/004zhu hai zhi bai qi lin)
+- [Chapter 4  诸海之白麒麟](/zh_CN/pdl/2083-after/004zhu hai zhi bai qi lin)
 - [Chapter 5 以钥匙通过那门](/zh_CN/pdl/2083-after/005yi yao shi tong guo na men)
 - [Chapter 6  善后](/zh_CN/pdl/2083-after/006shan hou)
 - [Chapter 7  醒来](/zh_CN/pdl/2083-after/007xing lai)
