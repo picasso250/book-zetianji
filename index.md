@@ -1,8 +1,8 @@
-﻿[繁體](/zh/)
-
 <figure class="home-hero">
   <img src="/assets/images/home-triple-dna.jpg" alt="SEERS 三链 DNA">
 </figure>
+
+[繁體](/zh/)
 
 ## Singularity
 
