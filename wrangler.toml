@@ -1,0 +1,9 @@
+name = "book-zetianji"
+compatibility_date = "2026-05-15"
+
+[assets]
+directory = "./_site"
+
+[[routes]]
+pattern = "book-zetianji.io99.xyz"
+custom_domain = true
