@@ -11,15 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: ruby/setup-ruby@v1
         with:
-          python-version: '3.12'
+          ruby-version: '3.3'
+          bundler-cache: true
 
-      - name: Install deps
-        run: pip install markdown python-frontmatter pyyaml
-
-      - name: Build site
-        run: python build.py
+      - name: Build with Jekyll
+        env:
+          JEKYLL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bundle exec jekyll build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
