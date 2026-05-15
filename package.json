@@ -1,0 +1,17 @@
+{
+  "name": "book-zetianji",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "npm run build && wrangler dev"
+  },
+  "devDependencies": {
+    "fs-extra": "^11.3.0",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^14.1.0",
+    "sass": "^1.89.0",
+    "sharp": "^0.34.5"
+  }
+}

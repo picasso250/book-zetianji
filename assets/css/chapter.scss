@@ -1,22 +1,31 @@
----
----
-
-@import "{{ site.theme }}";
+@use "style";
 @import "typo.css";
 
 .page-header {
-
-  @include large {
-    padding: 1rem 6rem;
-  }
-
-  @include medium {
-    padding: 1rem 4rem;
-  }
-
-  @include small {
-    padding: 1rem 1rem;
-  }
+  padding: 1.25rem 1rem;
 }
 
-.role-name {border-bottom: 1px solid #777;}
+.chapter-name {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.main-content {
+  max-width: 46rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.main-content p {
+  margin: 1.1rem 0;
+}
+
+.main-content > div:has(.prev-link) {
+  margin: 1rem 0 2rem;
+  text-align: center;
+  color: #586069;
+}
+
+.role-name {
+  border-bottom: 1px dotted #777;
+  cursor: help;
+}

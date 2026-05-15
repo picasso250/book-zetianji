@@ -1,5 +1,9 @@
 ﻿[繁體](/zh/)
 
+<figure class="home-hero">
+  <img src="/assets/images/home-triple-dna.jpg" alt="SEERS 三链 DNA">
+</figure>
+
 ## Singularity
 
 - [引子](/zh_CN/pdl/2083-after/0000yin zi)

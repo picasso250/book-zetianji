@@ -1,5 +1,109 @@
----
----
-
-@import "{{ site.theme }}";
 @import "typo.css";
+
+:root {
+  color-scheme: light;
+  --page-accent: #157878;
+  --page-accent-2: #159957;
+  --text: #24292f;
+  --muted: #586069;
+  --border: #d8dee4;
+  --bg: #ffffff;
+  --link: #0969da;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.page-header {
+  color: #fff;
+  text-align: center;
+  background-color: var(--page-accent);
+  background-image: linear-gradient(120deg, var(--page-accent-2), var(--page-accent));
+  padding: 4rem 1rem;
+}
+
+.project-name,
+.chapter-name {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 700;
+}
+
+.project-tagline {
+  margin: 1rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.btn {
+  display: inline-block;
+  margin: 1rem 0.5rem 0;
+  padding: 0.75rem 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+}
+
+.btn:hover {
+  color: #fff;
+  text-decoration: none;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.main-content {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-size: 1.05rem;
+}
+
+.home-hero {
+  margin: -0.5rem 0 2.25rem;
+}
+
+.home-hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 18px 42px rgba(20, 38, 46, 0.18);
+}
+
+.main-content h1,
+.main-content h2,
+.main-content h3 {
+  color: var(--page-accent);
+  margin-top: 2rem;
+}
+
+.main-content img {
+  max-width: 100%;
+}
+
+.site-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+}
