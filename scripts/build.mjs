@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url';
 import fs from 'fs-extra';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
-import * as sass from 'sass';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const siteDir = path.join(root, '_site');
@@ -181,20 +180,10 @@ async function buildCss() {
   const outCssDir = path.join(siteDir, 'assets', 'css');
   await fs.ensureDir(outCssDir);
 
-  for (const name of ['style.scss', 'chapter.scss']) {
-    const input = path.join(cssDir, name);
-    if (!await fs.pathExists(input)) continue;
-    const result = sass.compile(input, {
-      loadPaths: [cssDir],
-      style: 'expanded'
-    });
-    await fs.writeFile(path.join(outCssDir, name.replace(/\.scss$/, '.css')), result.css, 'utf8');
-    console.log(`  [OK] assets/css/${name}`);
-  }
-
   for (const file of await fs.readdir(cssDir)) {
     if (file.endsWith('.css')) {
       await fs.copy(path.join(cssDir, file), path.join(outCssDir, file));
+      console.log(`  [OK] assets/css/${file}`);
     }
   }
 }

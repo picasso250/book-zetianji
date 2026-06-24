@@ -62,11 +62,10 @@
 
   <div class="role-tooltip" id="role-tooltip"></div>
 
-  <script src="https://lib.sinaapp.com/js/jquery/3.1.0/jquery-3.1.0.min.js"></script>
   <script>
-    $(function () {
+    document.addEventListener('DOMContentLoaded', function () {
       /* ---- TOC navigation ---- */
-      var toc = {
+      const toc = {
         "引子":"/zh_CN/pdl/2083-after/0000yin zi",
         "新年：救赎":"/zh_CN/pdl/2083-after/side/xin nian jiu shu",
         "新年：福音——DAY OPEN":"/zh_CN/pdl/xin nian fu yin0022-day open",
@@ -92,71 +91,131 @@
         "Chapter 9 佛雷卡们":"/zh_CN/pdl/2083-after/009fu lei ka men",
         "Chapter 10 我是神眷之人":"/zh_CN/pdl/2083-after/010wo shi shen juan zhi ren"
       };
-      var tocPos = Object.keys(toc);
-      var title = "{{ page.title }}";
-      var pos = tocPos.indexOf(title);
+      const tocPos = Object.keys(toc);
+      const title = "{{ page.title }}";
+      const pos = tocPos.indexOf(title);
       if (pos > 0) {
-        $("a.prev-link").attr('href', toc[tocPos[pos-1]]).attr('title', tocPos[pos-1]);
+        document.querySelectorAll('a.prev-link').forEach(function (link) {
+          link.href = toc[tocPos[pos - 1]];
+          link.title = tocPos[pos - 1];
+        });
       } else {
-        $("a.prev-link").addClass('disabled');
+        document.querySelectorAll('a.prev-link').forEach(function (link) {
+          link.classList.add('disabled');
+        });
       }
       if (pos >= 0 && pos < tocPos.length - 1) {
-        $("a.next-link").attr('href', toc[tocPos[pos+1]]).attr('title', tocPos[pos+1]);
+        document.querySelectorAll('a.next-link').forEach(function (link) {
+          link.href = toc[tocPos[pos + 1]];
+          link.title = tocPos[pos + 1];
+        });
       } else {
-        $("a.next-link").addClass('disabled');
+        document.querySelectorAll('a.next-link').forEach(function (link) {
+          link.classList.add('disabled');
+        });
       }
 
       /* ---- Role-name tooltips ---- */
-      var $tooltip = $('#role-tooltip');
-      var roleMap = null;
+      const tooltip = document.getElementById('role-tooltip');
+      let roleMap = null;
 
       function showTooltip(e) {
         if (!roleMap) return;
-        var name = $(this).text();
-        var desc = roleMap[name];
+        const name = this.textContent;
+        const desc = roleMap[name];
         if (!desc) return;
-        $tooltip.html('<strong>' + name + '</strong><p>' + desc + '</p>').addClass('visible');
+        tooltip.replaceChildren();
+        const strong = document.createElement('strong');
+        strong.textContent = name;
+        const paragraph = document.createElement('p');
+        paragraph.textContent = desc;
+        tooltip.append(strong, paragraph);
+        tooltip.classList.add('visible');
         positionTooltip(e);
       }
 
       function positionTooltip(e) {
-        var x = e.clientX + 16;
-        var y = e.clientY + 12;
-        var tw = $tooltip.outerWidth();
-        var th = $tooltip.outerHeight();
+        let x = e.clientX + 16;
+        let y = e.clientY + 12;
+        const tw = tooltip.offsetWidth;
+        const th = tooltip.offsetHeight;
         if (x + tw > window.innerWidth - 8) x = e.clientX - tw - 16;
         if (y + th > window.innerHeight - 8) y = e.clientY - th - 12;
         if (x < 4) x = 4;
         if (y < 4) y = 4;
-        $tooltip.css({ left: x + 'px', top: y + 'px' });
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
       }
 
       function hideTooltip() {
-        $tooltip.removeClass('visible');
+        tooltip.classList.remove('visible');
       }
 
-      $.get("/roles.json", function (data) {
-        roleMap = data;
-        if (!roleMap || !Object.keys(roleMap).length) return;
-        var names = Object.keys(roleMap).sort(function(a,b){ return b.length - a.length; });
-        var pattern = names.map(function(n){ return n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|');
-        var regex = new RegExp('(' + pattern + ')', 'g');
-        $('.chapter-body p').each(function () {
-          var $p = $(this);
-          var html = $p.html();
-          if (!regex.test(html)) return;
+      function markRoleNames(paragraph, regex) {
+        const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
+        const textNodes = [];
+        while (walker.nextNode()) {
+          textNodes.push(walker.currentNode);
+        }
+
+        textNodes.forEach(function (node) {
+          const text = node.nodeValue;
           regex.lastIndex = 0;
-          $p.html(html.replace(regex, '<span class="role-name">$1</span>'));
+          if (!regex.test(text)) return;
+          regex.lastIndex = 0;
+
+          const fragment = document.createDocumentFragment();
+          let lastIndex = 0;
+          let match;
+          while ((match = regex.exec(text)) !== null) {
+            if (match.index > lastIndex) {
+              fragment.append(document.createTextNode(text.slice(lastIndex, match.index)));
+            }
+            const span = document.createElement('span');
+            span.className = 'role-name';
+            span.textContent = match[0];
+            fragment.append(span);
+            lastIndex = match.index + match[0].length;
+          }
+          if (lastIndex < text.length) {
+            fragment.append(document.createTextNode(text.slice(lastIndex)));
+          }
+          node.replaceWith(fragment);
         });
-        $(document).on('mouseenter', '.role-name', showTooltip);
-        $(document).on('mouseleave', '.role-name', hideTooltip);
-        $(document).on('mousemove', '.role-name', positionTooltip);
+      }
+
+      fetch('/roles.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Unable to load roles.json');
+          return response.json();
+        })
+        .then(function (data) {
+          roleMap = data;
+          if (!roleMap || !Object.keys(roleMap).length) return;
+          const names = Object.keys(roleMap).sort(function(a,b){ return b.length - a.length; });
+          const pattern = names.map(function(n){ return n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }).join('|');
+          const regex = new RegExp(pattern, 'g');
+          document.querySelectorAll('.chapter-body p').forEach(function (paragraph) {
+            markRoleNames(paragraph, regex);
+          });
+        })
+        .catch(function () {});
+
+      document.addEventListener('mouseenter', function (e) {
+        if (e.target.classList.contains('role-name')) showTooltip.call(e.target, e);
+      }, true);
+      document.addEventListener('mouseleave', function (e) {
+        if (e.target.classList.contains('role-name')) hideTooltip();
+      }, true);
+      document.addEventListener('mousemove', function (e) {
+        if (e.target.classList.contains('role-name')) positionTooltip(e);
       });
 
       /* ---- Move first image to hero area on mobile ---- */
-      var $firstImg = $('.chapter-body img').first();
-      if ($firstImg.length) {
-        $firstImg.prependTo('.chapter-hero');
+      const firstImg = document.querySelector('.chapter-body img');
+      const chapterHero = document.querySelector('.chapter-hero');
+      if (firstImg && chapterHero) {
+        chapterHero.prepend(firstImg);
       }
     });
   </script>
